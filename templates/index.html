@@ -2,24 +2,28 @@
 <html>
 <head>
     <title>Hobby Discovery</title>
-    <style>
-        body { font-family: Arial; margin: 20px; }
-        h1 { color: #333; }
-        .hobby { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
-        a { text-decoration: none; color: blue; }
-    </style>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Hobby Discovery Platform</h1>
-    <p>Explore and share unique hobbies!</p>
-    <a href="/add">Add a New Hobby</a>
-    <h2>All Hobbies</h2>
-    {% for hobby in hobbies %}
-        <div class="hobby">
-            <h3>{{ hobby.name }}</h3>
-            <p>{{ hobby.description }}</p>
-            <p><strong>Tip:</strong> {{ hobby.tip }}</p>
+    <div class="container">
+        <h1>Hobby Discovery Platform</h1>
+        <div class="stats">
+            <p>{{ hobbies|length }} hobbies across {{ categories|length }} categories</p>
+            {% for cat, count in categories.items() %}
+                <p>{{ cat }}: {{ count }}</p>
+            {% endfor %}
         </div>
-    {% endfor %}
+        <a href="/add">Add a New Hobby</a>
+        <div class="hobby-list">
+            {% for hobby in hobbies %}
+                <div class="hobby">
+                    <h3>{{ hobby.name }}</h3>
+                    <p>{{ hobby.description }}</p>
+                    <p><strong>Tip:</strong> {{ hobby.tip }}</p>
+                    <p class="category">Category: {{ hobby.category }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
